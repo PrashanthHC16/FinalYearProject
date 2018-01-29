@@ -5,7 +5,9 @@
  n=13;
  z1=h.EVENT.POS(n-1,1);
  z2=h.EVENT.POS(n,1);
- t=h.EVENT.TYP(n,1);
+ 
+ t1=h.EVENT.TYP(n+3,1);
+ 
 % 
 % z is the Stim code number
 % t is the sample value
