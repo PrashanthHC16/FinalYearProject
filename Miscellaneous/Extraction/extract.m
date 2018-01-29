@@ -26,10 +26,3 @@
      end
  end
  
-% 
-% z is the Stim code number
-% t is the sample value
-% 
-% If z1 and z2 are two stim codes, then the values of s between the sample
-% number t1 and t2 are the EEG signal within the event z1 and z2.
-% 
