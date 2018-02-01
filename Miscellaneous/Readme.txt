@@ -1,1 +1,1 @@
-This consists of all the miscellaneous information, codes, whatever.
+This consists of all the miscellaneous information, codes, whatevere.
