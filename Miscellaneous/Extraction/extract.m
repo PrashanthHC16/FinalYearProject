@@ -1,32 +1,48 @@
-[s,h]=sload('record-[2012.07.06-19.02.16].gdf');
- events=h.EVENT.TYP(:,1);
- 
- st=32779;  %Starting stim code
- en=32780;  %Ending stim code
+[s,h]=sload('record-[2012.07.06-19.06.14].gdf'); %Possible inputs {classes,s,h}
+events=h.EVENT.TYP(:,1); 
+samples=h.EVENT.POS(:,1);
+
+
+%% Template
+% Runs a loop to create the template of 31 classes
+template=zeros(31,1);
+for i=1:31
+    template(i,1)=33023+i;
+end
+
+clss=zeros(31,1); %Blank array holdin 31 zeros
+
+%% Searching for the classes
+ % Out of the possible 31 classes, this finds the total number of classes
+ % present in data
+ for i=1:length(template)
+       temp=events(events==template(i,1)); %Stores all the elements from 'events' that are equal to 'template' in temp' 
+       if isempty(temp)  %If the class is not present in data, continue
+          continue;
+       elseif template(i,1)==temp(1,1)    %If the value of this template is found in the data 
+             clss(i,1)=template(i,1);     %Store that number/class in cls  
+       end 
+ end
+classes=clss(clss~=0);     %All non zero classes are stored in the main variable, classes
+ClssLnth=length(classes);  %Number of classes in data
  
 
- 
- samples=h.EVENT.POS(:,1);
- classes=[33024;33025;33026;33027]; %Stim codes of the classes to be found in data
- clscnt=zeros(length(classes),1);   %count of the classes in data
- 
- for i=1:length(classes)
-     for j=1:length(events)
-         if(classes(i,1)==events(j,1))
-             clscnt(i,1)=clscnt(i,1)+1; %Simply storing the count of each class as an exercise, not required actually.
-          
-          
-          %Part below isn't working right now. Try to fix this. Here I am trying to extract the data and know which class it belongs to.
-             strti=j+1;   %Supposed to be index of starting sample
-             stpi=j+2;    %Index of ending sample
-             sampl1=h.EVENT.POS(strti,1);  % Actual sample where class 'i' starts in data
-             sampl2=h.EVENT.POS(stpi,1);   % Actual sample where class 'i' ends in data
-             
-             %The data to be extracted is in between these two samples. Try to extract it. This belongs in class i
-             
-             
-         end
-       
-     end
- end
- 
+%% Filling the cell
+ % Classes in the columns and Trials on the rows
+ j=1;
+ k=1; %Helps store trials in the column of the cell
+  for i=1:ClssLnth
+    while(j<length(events))
+        if(classes(i,1)==events(j,1))
+            strti=j+1;   %Supposed to be index of starting sample
+            stpi=j+2;    %Index of ending sample
+            sampl1=samples(strti,:);  % Actual sample where class 'i' starts in data
+            sampl2=samples(stpi,:);   % Actual sample where class 'i' ends in data
+            X{i,k}=s(sampl1:sampl2,:);    % Extracting and storing the samples
+            k=k+1;
+        end
+            j=j+1;
+    end
+    j=1;
+    k=1;
+  end
