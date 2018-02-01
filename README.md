@@ -7,4 +7,4 @@ The **Dataset** folder must contain all the datasets collected so far.
 
 The **MasterCodeOffline** folder must contain the SSVEP code and its branches.
 
-The **Miscellaneous** folder must contain any other form of codes/ideas/links pertaining to the project
+The **Miscellaneous** folder must contain any other form of codes/ideas/links pertaining to the project.
