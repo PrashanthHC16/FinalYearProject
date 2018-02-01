@@ -12,7 +12,7 @@ for i=1:31
     template(i,1)=33023+i;
 end
 
-clss=zeros(31,1); %Blank array holdin 31 zeros
+clss=zeros(31,1); %Blank array holding 31 zeros
 
 %% Searching for the classes
  % Out of the possible 31 classes, this finds the total number of classes
